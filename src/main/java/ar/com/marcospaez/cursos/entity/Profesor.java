@@ -3,10 +3,8 @@ package ar.com.marcospaez.cursos.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -17,6 +15,9 @@ public class Profesor {
     private Long id_profesor;
     private String nombre;
     private String email;
+
+    @OneToMany(mappedBy = "unProfesor")
+    private List<Curso> cursos;
 
     public Profesor() {
     }
