@@ -27,6 +27,7 @@
           <th scope="col">DNI</th>
           <th scope="col">Fecha Nacimineto</th>
           <th scope="col">Acciones</th>
+          <th scope="col">Ver</th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +39,9 @@
           <td>
             <a th:href="@{formulario/alumno/{id}(id=${alumno.id_alumno})}" class="btn btn-warning">Editar</a>
             <a th:href="@{eliminar/alumno/{id}(id=${alumno.id_alumno})}" class="btn btn-danger">Eliminar</a>
+          </td>
+          <td>
+            <a th:href="@{alumno/curso/{id}(id=${alumno.id_alumno})}" class="btn btn-success  ">Cursos</a>
           </td>
         </tr>
         </tbody>

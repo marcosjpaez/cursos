@@ -15,7 +15,7 @@ import java.util.List;
 public class AlumnoController {
 
     @Autowired
-    AlumnoService alumnoService;
+    private AlumnoService alumnoService;
 
     @GetMapping(value = "/alumnos")
     public String alumnos(Model model) {
@@ -82,4 +82,5 @@ public class AlumnoController {
             return e.getMessage();
         }
     }
+
 }

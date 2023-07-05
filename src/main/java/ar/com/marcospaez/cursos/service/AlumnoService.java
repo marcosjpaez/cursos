@@ -1,6 +1,7 @@
 package ar.com.marcospaez.cursos.service;
 
 import ar.com.marcospaez.cursos.entity.Alumno;
+import ar.com.marcospaez.cursos.entity.Curso;
 import ar.com.marcospaez.cursos.repository.IAlumnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

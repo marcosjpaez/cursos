@@ -1,19 +1,37 @@
 <nav th:fragment="nav_bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="http://localhost:8080/">Universidad</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="http://localhost:8080/profesores">Profesores</a>
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Profesores
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="http://localhost:8080/profesores">Listado</a></li>
+            <li><a class="dropdown-item" href="http://localhost:8080/formulario/profesornuevo">Agregar Profesor</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="http://localhost:8080/alumnos">Alumnos</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Alumnos
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="http://localhost:8080/alumnos">Listado</a></li>
+            <li><a class="dropdown-item" href="http://localhost:8080/formulario/alumnonuevo">Agregar Alumno</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="http://localhost:8080/cursos">Cursos</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Cursos
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="http://localhost:8080/cursos">Listado</a></li>
+            <li><a class="dropdown-item" href="http://localhost:8080/formulario/cursonuevo">Agregar Curso</a></li>
+          </ul>
         </li>
       </ul>
     </div>
