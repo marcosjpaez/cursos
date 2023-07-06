@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <title>Alumnos</title>
   <meta charset="UTF-8">
@@ -10,11 +10,11 @@
 <nav th:replace="components/navbar :: nav_bar"></nav>
 <div class="container">
   <div class="row mt-2">
-    <div class="col-3">
+    <div class="col-9">
       <h4>Alumnos</h4>
     </div>
-    <div class="col-9 d-flex flex-row-reverse">
-      <a th:href="@{formulario/alumnonuevo}" class="btn btn-success">Agregar Alumno</a>
+    <div class="col-3 d-flex flex-row-reverse">
+      <a th:href="@{formulario/alumnonuevo}" sec:authorize="hasRole('ADMIN')" class="btn btn-success">Agregar Alumno</a>
     </div>
   </div>
   <div class="row mt-2">
@@ -26,8 +26,8 @@
           <th scope="col">Email</th>
           <th scope="col">DNI</th>
           <th scope="col">Fecha Nacimineto</th>
-          <th scope="col">Acciones</th>
-          <th scope="col">Ver</th>
+          <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
+          <th scope="col" sec:authorize="hasRole('ADMIN')">Ver</th>
         </tr>
         </thead>
         <tbody>
@@ -36,11 +36,11 @@
           <td th:text="${alumno.email}"></td>
           <td th:text="${alumno.dni}"></td>
           <td th:text="${#temporals.format(alumno.fechaNac,'dd-MM-yyyy')}"></td>
-          <td>
+          <td sec:authorize="hasRole('ADMIN')">
             <a th:href="@{formulario/alumno/{id}(id=${alumno.id_alumno})}" class="btn btn-warning">Editar</a>
             <a th:href="@{eliminar/alumno/{id}(id=${alumno.id_alumno})}" class="btn btn-danger">Eliminar</a>
           </td>
-          <td>
+          <td sec:authorize="hasRole('ADMIN')">
             <a th:href="@{alumno/curso/{id}(id=${alumno.id_alumno})}" class="btn btn-success  ">Cursos</a>
           </td>
         </tr>
