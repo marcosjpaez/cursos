@@ -13,7 +13,7 @@ import java.util.List;
 public class ProfesorController {
 
     @Autowired
-    ProfesorService profesorService;
+    private ProfesorService profesorService;
     @GetMapping(value = "/profesores")
     public String profesores(Model model) {
         try {

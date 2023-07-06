@@ -1,6 +1,7 @@
 package ar.com.marcospaez.cursos.service;
 
 import ar.com.marcospaez.cursos.entity.Alumno;
+import ar.com.marcospaez.cursos.entity.Curso;
 
 import java.time.LocalDate;
 import java.util.List;
