@@ -1,9 +1,6 @@
-<nav th:fragment="nav_bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav th:fragment="navbar2" class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="http://localhost:8080/">Universidad</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="d-flex" id="navbarNavDarkDropdown">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
@@ -33,10 +30,13 @@
             <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" href="http://localhost:8080/formulario/cursonuevo">Agregar Curso</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" th:if="${session.usuariosession != null}" href="/logout" id="navbarDarkDropdownMenuLink" aria-expanded="false">
-            Cerrar Sesión
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Perfil
           </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" th:if="${session.usuariosession == null}" href="/registrar" id="navbarDarkDropdownMenuLink" aria-expanded="false">

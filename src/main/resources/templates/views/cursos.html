@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <title>Cursos</title>
   <meta charset="UTF-8">
@@ -10,11 +10,11 @@
 <nav th:replace="components/navbar :: nav_bar"></nav>
 <div class="container">
   <div class="row mt-2">
-    <div class="col-3">
+    <div class="col-9">
       <h4>Cursos</h4>
     </div>
-    <div class="col-9 d-flex flex-row-reverse">
-      <a th:href="@{formulario/cursonuevo}" class="btn btn-success">Agregar Curso</a>
+    <div class="col-3 d-flex flex-row-reverse">
+      <a th:href="@{formulario/cursonuevo}" sec:authorize="hasRole('ADMIN')" class="btn btn-success">Agregar Curso</a>
     </div>
   </div>
   <div class="row mt-2">
@@ -26,7 +26,7 @@
           <th scope="col">Descripción</th>
           <th scope="col">Turno</th>
           <th scope="col">Profesor</th>
-          <th scope="col">Acciones</th>
+          <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
           <th scope="col">Ver</th>
         </tr>
         </thead>
@@ -36,7 +36,7 @@
           <td th:text="${curso.descripcion}"></td>
           <td th:text="${curso.turno}"></td>
           <td th:text="${curso.unProfesor.nombre}"></td>
-          <td>
+          <td sec:authorize="hasRole('ADMIN')">
             <a th:href="@{formulario/curso/{id}(id=${curso.id_curso})}" class="btn btn-warning">Editar</a>
             <a th:href="@{eliminar/curso/{id}(id=${curso.id_curso})}" class="btn btn-danger">Eliminar</a>
           </td>

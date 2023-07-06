@@ -16,7 +16,7 @@ public interface ICursoAlumnoRepository extends JpaRepository<CursoAlumno, Long>
     @Query(value = "SELECT * FROM curso_alumno WHERE id_curso = :id_curso", nativeQuery = true)
     List<CursoAlumno> buscarPorCurso(Long id_curso);
 
-    @Query(value = "SELECT * FROM curso_alumno WHERE id_curso = :id_curso AND id_alumno = (SELECT id_alumno FROM alumno WHERE nombre LIKE %:nombre%)", nativeQuery = true)
+    @Query(value = "SELECT * FROM curso_alumno WHERE id_curso = :id_curso AND id_alumno IN (SELECT id_alumno FROM alumno WHERE nombre LIKE %:nombre%)", nativeQuery = true)
     List<CursoAlumno> buscarPorNombre(Long id_curso, String nombre);
 
 }
