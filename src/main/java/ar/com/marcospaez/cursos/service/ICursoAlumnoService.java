@@ -1,6 +1,7 @@
 package ar.com.marcospaez.cursos.service;
 
 import ar.com.marcospaez.cursos.entity.CursoAlumno;
+import ar.com.marcospaez.cursos.exceptions.MiException;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface ICursoAlumnoService {
 
     public List<CursoAlumno> getCursoAlumno();
 
-    public void saveCursoAlumno(CursoAlumno cursoAlumno);
+    public void saveCursoAlumno(CursoAlumno cursoAlumno) throws MiException;
 
     public void deleteCursoAlumno(Long id_cursoalumno);
 

@@ -1,7 +1,7 @@
 package ar.com.marcospaez.cursos.service;
 
 import ar.com.marcospaez.cursos.entity.Alumno;
-import ar.com.marcospaez.cursos.entity.Curso;
+import ar.com.marcospaez.cursos.exceptions.MiException;
 import ar.com.marcospaez.cursos.repository.IAlumnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,16 @@ public class AlumnoService implements IAlumnoService {
     }
 
     @Override
-    public void saveAlumno(Alumno alumno) {
+    public void saveAlumno(Alumno alumno) throws MiException {
+        if(alumno.getNombre().isEmpty()) {
+            throw new MiException("el nombre no puede estar vacío");
+        } else if (alumno.getEmail().isEmpty()) {
+            throw new MiException("el email no puede estar vacío");
+        } else if (alumno.getDni().isEmpty()) {
+            throw new MiException("el DNI no puede estar vacío");
+        } else if (alumno.getFechaNac()== null) {
+            throw new MiException("la fecha tiene un formato incorrecto");
+        }
         alumnoRepository.save(alumno);
     }
 
@@ -37,7 +46,7 @@ public class AlumnoService implements IAlumnoService {
     }
 
     @Override
-    public void editAlumno(Long id_alumno, String nuevoNombre, String nuevoEmail, String nuevoDni, LocalDate nuevaFechaNac) {
+    public void editAlumno(Long id_alumno, String nuevoNombre, String nuevoEmail, String nuevoDni, LocalDate nuevaFechaNac) throws MiException {
         Alumno alumno = this.findAlumno(id_alumno);
         alumno.setNombre(nuevoNombre);
         alumno.setEmail(nuevoEmail);

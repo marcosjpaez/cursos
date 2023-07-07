@@ -1,11 +1,13 @@
 package ar.com.marcospaez.cursos.controller;
 
 import ar.com.marcospaez.cursos.entity.Alumno;
+import ar.com.marcospaez.cursos.exceptions.MiException;
 import ar.com.marcospaez.cursos.service.AlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -39,12 +41,14 @@ public class AlumnoController {
     }
 
     @PostMapping(value = "/formulario/alumnonuevo")
-    public String nuevoAlumno(Alumno alumno) {
+    public String nuevoAlumno(Alumno alumno, ModelMap modelo) {
         try {
             this.alumnoService.saveAlumno(alumno);
             return "redirect:/alumnos";
-        } catch (Exception e) {
-            return e.getMessage();
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.addAttribute("alumno", new Alumno());
+            return "/views/forms/alumnonuevo";
         }
     }
 
@@ -64,12 +68,14 @@ public class AlumnoController {
                                 @RequestParam("nombre") String nombre,
                                 @RequestParam("email") String email,
                                 @RequestParam("dni") String dni,
-                                @RequestParam("fechaNac") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaNac) {
+                                @RequestParam("fechaNac") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaNac,
+                                ModelMap modelo) {
         try {
             this.alumnoService.editAlumno(id_alumno, nombre, email, dni, fechaNac);
             return "redirect:/alumnos";
-        } catch (Exception e) {
-            return e.getMessage();
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            return "/views/forms/alumno";
         }
     }
 

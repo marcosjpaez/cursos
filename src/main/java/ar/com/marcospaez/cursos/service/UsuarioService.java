@@ -2,6 +2,7 @@ package ar.com.marcospaez.cursos.service;
 
 import ar.com.marcospaez.cursos.entity.Usuario;
 import ar.com.marcospaez.cursos.enumeraciones.Rol;
+import ar.com.marcospaez.cursos.exceptions.MiException;
 import ar.com.marcospaez.cursos.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,7 +28,16 @@ public class UsuarioService implements UserDetailsService {
     private IUsuarioRepository usuarioRepository;
 
     @Transactional
-    public void resgistrar(String nombre, String email, String password, String password2) {
+    public void resgistrar(String nombre, String email, String password, String password2) throws MiException {
+        if(nombre.isEmpty()) {
+            throw new MiException("el nombre no puede estar vacío");
+        } else if (email.isEmpty()) {
+            throw new MiException("el email no puede estar vacío");
+        } else if (password.isEmpty()) {
+            throw new MiException("la contraseña no puede estar vacía");
+        } else if (!password.equals(password2)) {
+            throw new MiException("las contraseñas ingresadas deben ser iguales");
+        }
         Usuario usuario = new Usuario();
         usuario.setNombre(nombre);
         usuario.setEmail(email);

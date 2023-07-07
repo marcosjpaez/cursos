@@ -2,11 +2,13 @@ package ar.com.marcospaez.cursos.controller;
 
 import ar.com.marcospaez.cursos.entity.Curso;
 import ar.com.marcospaez.cursos.entity.Profesor;
+import ar.com.marcospaez.cursos.exceptions.MiException;
 import ar.com.marcospaez.cursos.service.CursoService;
 import ar.com.marcospaez.cursos.service.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,12 +48,15 @@ public class CursoController {
     }
 
     @PostMapping(value = "/formulario/cursonuevo")
-    public String nuevoCurso(Curso curso) {
+    public String nuevoCurso(Curso curso, ModelMap modelo) {
         try {
             this.cursoService.saveCurso(curso);
             return "redirect:/cursos";
-        } catch (Exception e) {
-            return e.getMessage();
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.addAttribute("curso", new Curso());
+            modelo.addAttribute("listaProfesores", this.profesorService.getProfesores());
+            return "/views/forms/cursonuevo";
         }
     }
 
@@ -72,12 +77,15 @@ public class CursoController {
                                @RequestParam("nombre") String nombre,
                                @RequestParam("descripcion") String descripcion,
                                @RequestParam("turno") String turno,
-                               @RequestParam("unProfesor") Profesor unProfesor) {
+                               @RequestParam("unProfesor") Profesor unProfesor,
+                               ModelMap modelo) {
         try {
             this.cursoService.editCurso(id_curso, nombre, descripcion, turno, unProfesor);
             return "redirect:/cursos";
-        } catch (Exception e) {
-            return e.getMessage();
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.addAttribute("listaProfesores", this.profesorService.getProfesores());
+            return "/views/forms/curso";
         }
     }
 

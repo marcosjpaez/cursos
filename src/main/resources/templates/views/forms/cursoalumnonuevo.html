@@ -14,6 +14,12 @@
             <div class="card">
                 <div class="card-body">
                     <form th:action="@{/formulario/cursoalumnonuevo/{id_alumno}(id_alumno=${id_alumno})}" method="post" th:object="${cursoalumno}">
+                        <div th:if="${error != null}" class="card text-white bg-danger mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Error!</h5>
+                                <p class="card-text" th:text="${error}"></p>
+                            </div>
+                        </div>
                         <div>
                             <label for="unCurso">Curso:</label>
                             <select class="form-control" id="unCurso" th:field="*{unCurso}">
