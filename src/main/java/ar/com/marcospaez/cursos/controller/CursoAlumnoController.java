@@ -1,12 +1,14 @@
 package ar.com.marcospaez.cursos.controller;
 
 import ar.com.marcospaez.cursos.entity.CursoAlumno;
+import ar.com.marcospaez.cursos.exceptions.MiException;
 import ar.com.marcospaez.cursos.service.AlumnoService;
 import ar.com.marcospaez.cursos.service.CursoAlumnoService;
 import ar.com.marcospaez.cursos.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,13 +53,14 @@ public class CursoAlumnoController {
     }
 
     @PostMapping(value = "/formulario/cursoalumnonuevo/{id_alumno}")
-    public String nuevoCursoAlumno(@PathVariable("id_alumno") Long id_alumno, CursoAlumno cursoAlumno) {
+    public String nuevoCursoAlumno(@PathVariable("id_alumno") Long id_alumno, CursoAlumno cursoAlumno, ModelMap modelo) {
         try {
             cursoAlumno.setUnAlumno(this.alumnoService.findAlumno(id_alumno));
             this.cursoAlumnoService.saveCursoAlumno(cursoAlumno);
             return "redirect:/alumno/curso/"+id_alumno;
-        } catch (Exception e) {
-            return e.getMessage();
+        } catch (MiException ex) {
+            modelo.put("error",ex.getMessage());
+            return "/view/forms/cursoalumnonuevo";
         }
     }
 
