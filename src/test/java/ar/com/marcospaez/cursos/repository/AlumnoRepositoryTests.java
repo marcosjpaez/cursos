@@ -21,8 +21,6 @@ public class AlumnoRepositoryTests {
     @Autowired
     private IAlumnoRepository alumnoRepository;
 
-    private Alumno alumno;
-
     @Test
     @DisplayName("Test para guardar un alumno")
     void testGuardarAlumno() {

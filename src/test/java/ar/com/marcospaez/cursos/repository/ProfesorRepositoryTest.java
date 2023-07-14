@@ -20,8 +20,6 @@ public class ProfesorRepositoryTest {
     @Autowired
     private IProfesorRepository profesorRepository;
 
-    private Profesor profesor;
-
     @DisplayName("Test para guardar un profesor")
     @Test
     void testGuardarProfesor() {
