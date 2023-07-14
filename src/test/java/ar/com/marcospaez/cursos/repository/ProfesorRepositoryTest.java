@@ -22,11 +22,6 @@ public class ProfesorRepositoryTest {
 
     private Profesor profesor;
 
-    @BeforeEach
-    void Setup() {
-        profesor = new Profesor(1L,"Profesor1", "profe1@gmail.com");
-    }
-
     @DisplayName("Test para guardar un profesor")
     @Test
     void testGuardarProfesor() {
@@ -47,11 +42,9 @@ public class ProfesorRepositoryTest {
         //give
         Profesor profesor1 = new Profesor(2L,"Profesor2", "profe2@gmail.com");
         profesorRepository.save(profesor1);
-        profesorRepository.save(profesor);
 
         //when
         List<Profesor> listaProfesores =profesorRepository.findAll();
-
 
         //then
         assertThat(listaProfesores).isNotNull();
